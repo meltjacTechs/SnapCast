@@ -8,7 +8,7 @@ const Header = ({ subHeader, title, userImg } : SharedHeaderProps) => {
             <section className="header-container">
                 <div className="details">
                     {userImg && (
-                        <Image src={userImg || '/assets/images/dummy.jpg'} alt="user" width={66} height={66} className="rounded-full"/>
+                        <Image src={userImg} alt="user" width={66} height={66} className="rounded-full"/>
                     )}
 
                     <article>
