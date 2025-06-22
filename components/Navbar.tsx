@@ -20,7 +20,7 @@ const Navbar = () => {
                             </button>
 
                             <button className="cursor-pointer">
-                                <Image src="assets/icons/logout.svg" alt="logout" width={24} height={24} />
+                                <Image src="assets/icons/logout.svg" alt="logout" width={24} height={24} className="rotate-180" />
                             </button>
                         </figure>
                     )
