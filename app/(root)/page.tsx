@@ -10,7 +10,7 @@ const Page = () => {
 
             <VideoCard
                 id="1"
-                title="Snap Chat Message - 30 June 2025"
+                title="Snap Chat Message"
                 thumbnail="/assets/samples/thumbnail (1).png"
                 createdAt={new Date("2025-05-01")} // ✅ Corrected this line
                 userImg="/assets/images/jason.png"

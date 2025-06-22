@@ -29,7 +29,13 @@ const VideoCard = ({
                         <span>{views}</span>
                     </aside>
                 </div>
-                <h2>{title} - {""}</h2>
+                <h2>{title} - {""} {createdAt.toLocaleDateString
+                ( 'en-UK', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric'
+                    })}
+                </h2>
             </article>
         </Link>
     );
