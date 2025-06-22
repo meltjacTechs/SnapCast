@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import {ICONS} from "@/constants";
+import DropdownList from "@/components/DropdownList";
 
 const Header = ({ subHeader, title, userImg } : SharedHeaderProps) => {
     return (
@@ -41,8 +42,7 @@ const Header = ({ subHeader, title, userImg } : SharedHeaderProps) => {
                     />
                     <Image src="/assets/icons/search.svg" alt="search" width={16} height={16} />
                 </div>
-
-                {`<DropdownList />`}
+                <DropdownList />
             </section>
         </header>
     )
