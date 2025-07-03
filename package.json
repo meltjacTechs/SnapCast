@@ -11,6 +11,7 @@
   "dependencies": {
     "@xata.io/client": "^0.0.0-next.v93343b9646f57a1e5c51c35eccf0767c2bb80baa",
     "better-auth": "^1.2.10",
+    "dotenv": "^17.0.1",
     "drizzle-orm": "^0.44.2",
     "next": "15.3.4",
     "pg": "^8.16.3",
