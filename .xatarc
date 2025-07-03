@@ -1,0 +1,6 @@
+{
+  "databaseURL": "https://Emmanuel-Bwire-Juma-s-workspace-hftbv9.eu-central-1.xata.sh/db/jsm_snapcast",
+  "codegen": {
+    "output": "src/xata.ts"
+  }
+}
