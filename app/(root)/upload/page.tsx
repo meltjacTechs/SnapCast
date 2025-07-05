@@ -25,13 +25,34 @@ const Page = () => {
             {error && <div className="error-field">{error}</div>}
             <form className="rounded-20 shadow-10 gap-6 w-full flex flex-col px-5 py-7.5">
                 <FormField
-                   id="title"
-                   label="Title"
-                   placeholder="Enter a clear and concise title for your video."
-                   value={formData.title}
-                   onChange={handleInputChange}
+                id="title"
+                label="Title"
+                placeholder="Enter a clear and concise title for your video."
+                value={formData.title}
+                onChange={handleInputChange}
+            />
+            <FormField
+                 id="description"
+                 label="Description"
+                 placeholder="Describe what this video is about."
+                 value={formData.description}
+                 as="textarea"
+                 onChange={handleInputChange}
+            />
+
+            <FileInput />
+            <FileInput />
+                <FormField
+                    id="visibility"
+                    label="Visibility"
+                    value={formData.visibility}
+                    as="select"
+                    options={[
+                        {value: 'public', label: 'Public'},
+                        {value: 'private', label: 'Private'},
+                    ]}
+                    onChange={handleInputChange}
                 />
-                <FileInput />
             </form>
 
         </div>
