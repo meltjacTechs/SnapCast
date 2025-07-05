@@ -19,7 +19,15 @@ const FileInput = ({id, label, accept, file, previewUrl, inputRef, onChange, onR
                     <p>Click to upload your {id}</p>
                 </figure>
             ): (
-                <div></div>
+                <div>
+                    {type === 'video'
+                        ? <video src={previewUrl} controls />
+                        : <Image src={previewUrl} alt="image" fill />
+                }
+                <button type="button" onClick={onReset}>
+                    <Image src="/assets/icons/close.svg" alt="close" width={16} height={16} />
+                </button>
+                </div>
             )}
         </section>
     )
