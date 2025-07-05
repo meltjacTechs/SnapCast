@@ -3,6 +3,8 @@
 import FormField from "@/components/FormField";
 import FileInput from "@/components/FileInput";
 import {ChangeEvent, useState} from "react";
+import {useFileInput} from "@/lib/hooks/useFileInput";
+import {MAX_THUMBNAIL_SIZE, MAX_VIDEO_SIZE} from "@/constants";
 
 const Page = () => {
     const [formData, setFormData] = useState({
@@ -11,8 +13,8 @@ const Page = () => {
         visibility: 'public',
     })
 
-    const video = {};
-    const thumbnail = {};
+    const video = useFileInput(MAX_VIDEO_SIZE);
+    const thumbnail = useFileInput(MAX_THUMBNAIL_SIZE);
 
     const [error, setError] = useState(null);
 
