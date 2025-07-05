@@ -17,7 +17,12 @@ const FormField = ({ id, label, type = "text", value, onChange, placeholder, as 
           name={id}
           value={value}
           onChange={onChange}
-      />
+      >
+          {options.map(({label, value}) => (
+              <option key={label} value={value}>{label}</option>
+          ))}
+          </select>
+
   }else {
       return <input
           id={id}
