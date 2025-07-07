@@ -43,6 +43,8 @@ const Page = () => {
 
             //upload the video to Bunny
             //Upload the thumbnail to DB
+            //Attach thumbnail
+            //Create a new DB entry for the video details (urls, data)
 
         } catch(error){
             console.log("Error submitting form", error);

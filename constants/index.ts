@@ -1,13 +1,13 @@
 // export const MAX_VIDEO_SIZE = 500 * 1024 * 1024;
 // export const MAX_THUMBNAIL_SIZE = 10 * 1024 * 1024;
 //
-// // export const BUNNY = {
-// //   STREAM_BASE_URL: "https://video.bunnycdn.com/library",
-// //   STORAGE_BASE_URL: "https://sg.storage.bunnycdn.com/snapcast",
-// //   CDN_URL: "https://snapcast.b-cdn.net",
-// //   EMBED_URL: "https://iframe.mediadelivery.net/embed",
-// //   TRANSCRIPT_URL: "https://vz-47a08e64-84d.b-cdn.net",
-// // };
+export const BUNNY = {
+  STREAM_BASE_URL: "https://video.bunnycdn.com/library",
+  STORAGE_BASE_URL: "https://sg.storage.bunnycdn.com/254snapcast-ke",
+  CDN_URL: "https://254SnapCast-KE.b-cdn.net",
+  EMBED_URL: "https://iframe.mediadelivery.net/embed",
+  TRANSCRIPT_URL: "https://vz-a5c6f1e5-95f.b-cdn.net",
+ };
 //
 // export const emojis = ["😂", "😍", "👍"];
 //
