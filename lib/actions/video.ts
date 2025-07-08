@@ -37,4 +37,22 @@ export const getVideoUploadUrl = withErrorHandling(async () =>{
     )
 
     const uploadUrl = `${VIDEO_STREAM_BASE_URl}/${BUNNY_LIBRARY_ID}/videos/${videoResponse.guid}`;
+
+   return {
+       videoId: videoResponse.guid,
+       uploadUrl,
+       accessKey: ACCESS_KEYS.streamAccessKey
+   }
+})
+
+export const getThumbnailUploadUrl = withErrorHandling(async ( videoId: string ) => {
+    const fileName = `${Date.now()}-${videoId}-thumbnail}`;
+    const uploadUrl = `${THUMBNAIL_STORAGE_BASE_URL}/thumbnails/${fileName}`;
+    const cdnUrl = `${THUMBNAIL_CDN_URL}/thumbnails/${fileName}`;
+
+    return {
+        uploadUrl,
+        cdnUrl,
+        accessKey: ACCESS_KEYS.storageAccessKey
+    }
 })
