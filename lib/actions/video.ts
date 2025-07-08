@@ -6,6 +6,7 @@ import {headers} from "next/headers";
 import {BUNNY} from "@/constants";
 import {db} from "@/drizzle/db";
 import {videos} from "@/drizzle/schema";
+import {revalidatePath} from "next/cache";
 
 const VIDEO_STREAM_BASE_URl = BUNNY.STREAM_BASE_URL
 const THUMBNAIL_STORAGE_BASE_URL = BUNNY.STORAGE_BASE_URL;
@@ -23,6 +24,10 @@ const getSessionUserId = async (): Promise<string> => {
     if(!session) throw new Error('Unauthenticated');
 
     return session.user.id
+}
+
+const revalidatePaths = (paths: string[]) => {
+    paths.forEach((path) =>revalidatePath(path))
 }
 
 //Server Actions
@@ -59,20 +64,32 @@ export const getThumbnailUploadUrl = withErrorHandling(async ( videoId: string )
     }
 })
 
-export const saveVideoDetails = withErrorHandling(async (videoDetails: VideoDetails )=> {
-    const userId = await getSessionUserId();
-
-    await apiFetch(
-        `${VIDEO_STREAM_BASE_URl}/${BUNNY_LIBRARY_ID}/videos/${videoDetails.videoId}`,
-
-        {
-            method: 'POST',
-            bunnyType: 'stream',
-            body: {
-                title: videoDetails.title,
-                description: videoDetails.description,
+export const saveVideoDetails = withErrorHandling(
+    async (videoDetails: VideoDetails) => {
+        const userId = await getSessionUserId();
+        await validateWithArcjet(userId);
+        await apiFetch(
+            `${VIDEO_STREAM_BASE_URL}/${BUNNY_LIBRARY_ID}/videos/${videoDetails.videoId}`,
+            {
+                method: "POST",
+                bunnyType: "stream",
+                body: {
+                    title: videoDetails.title,
+                    description: videoDetails.description,
+                },
             }
-        }
-    )
-    await db.insert(videos).values({});
-})
+        );
+
+        const now = new Date();
+        await db.insert(videos).values({
+            ...videoDetails,
+            videoUrl: `${BUNNY.EMBED_URL}/${BUNNY_LIBRARY_ID}/${videoDetails.videoId}`,
+            userId,
+            createdAt: now,
+            updatedAt: now,
+        });
+
+        revalidatePaths(["/"]);
+        return { videoId: videoDetails.videoId };
+    }
+);
