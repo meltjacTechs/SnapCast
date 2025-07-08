@@ -4,6 +4,8 @@ import {apiFetch, getEnv, withErrorHandling} from "@/lib/utils";
 import {auth} from "@/lib/auth";
 import {headers} from "next/headers";
 import {BUNNY} from "@/constants";
+import {db} from "@/drizzle/db";
+import {videos} from "@/drizzle/schema";
 
 const VIDEO_STREAM_BASE_URl = BUNNY.STREAM_BASE_URL
 const THUMBNAIL_STORAGE_BASE_URL = BUNNY.STORAGE_BASE_URL;
@@ -55,4 +57,22 @@ export const getThumbnailUploadUrl = withErrorHandling(async ( videoId: string )
         cdnUrl,
         accessKey: ACCESS_KEYS.storageAccessKey
     }
+})
+
+export const saveVideoDetails = withErrorHandling(async (videoDetails: VideoDetails )=> {
+    const userId = await getSessionUserId();
+
+    await apiFetch(
+        `${VIDEO_STREAM_BASE_URl}/${BUNNY_LIBRARY_ID}/videos/${videoDetails.videoId}`,
+
+        {
+            method: 'POST',
+            bunnyType: 'stream',
+            body: {
+                title: videoDetails.title,
+                description: videoDetails.description,
+            }
+        }
+    )
+    await db.insert(videos).values({});
 })
