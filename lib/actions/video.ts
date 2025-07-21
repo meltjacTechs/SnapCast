@@ -34,7 +34,7 @@ const revalidatePaths = (paths: string[]) => {
 export const getVideoUploadUrl = withErrorHandling(async () =>{
     await getSessionUserId();
 
-   const videoResponse = await apiFetch(
+   const videoResponse = await apiFetch<BunnyVideoResponse>(
         `${VIDEO_STREAM_BASE_URl}/${BUNNY_LIBRARY_ID}/videos`,
         {
             method: 'POST',
