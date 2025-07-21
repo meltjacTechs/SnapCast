@@ -5,6 +5,20 @@ import FileInput from "@/components/FileInput";
 import {ChangeEvent, FormEvent, useState} from "react";
 import {useFileInput} from "@/lib/hooks/useFileInput";
 import {MAX_THUMBNAIL_SIZE, MAX_VIDEO_SIZE} from "@/constants";
+import {getVideoUploadUrl} from "@/lib/actions/video";
+
+const uploadFileToBunny = (file: File, uploadUrl: string, accessKey: string): Promise<void> => {
+    return fetch(uploadUrl, {
+       method: 'PUT',
+       headers: {
+           'Content-Type': file.type,
+           AccessKey: accessKey
+       },
+        body: file,
+    }).then((response) => {
+        if(!response.ok) throw new Error('Upload failed');
+    })
+}
 
 const Page = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -40,8 +54,17 @@ const Page = () => {
               setError('Please fill in all the details.');
               return;
             }
+            //get upload url
+            const {
+                videoId,
+                uploadUrl: videoUploadUrl,
+                accessKey: videoAccessKey,
 
+            } = await getVideoUploadUrl();
+
+            if(!videoUploadUrl || !videoAccessKey) throw new Error('failed to get video upload credentials')
             //upload the video to Bunny
+
             //Upload the thumbnail to DB
             //Attach thumbnail
             //Create a new DB entry for the video details (urls, data)
